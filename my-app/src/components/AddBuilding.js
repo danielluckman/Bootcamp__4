@@ -4,52 +4,74 @@ class AddBuilding extends React.Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            code: '',
-            name: '',
-            address: '',
-            latitude: '',
-            longitude: '',
-            newData: this.props.data
-        }
+        this.setState();
     }
 
-    codeUpdate = (event) => {
+    _codeUpdate = (event) => {
         this.setState({
             code: event.target.value
-        })
+        });
+    };
+    get codeUpdate() {
+        return this._codeUpdate;
+    }
+    set codeUpdate(value) {
+        this._codeUpdate = value;
     }
 
     
 
-    nameUpdate = (event) => {
+    _nameUpdate = (event) => {
         this.setState({
             name: event.target.value
-        })
+        });
+    };
+    get nameUpdate() {
+        return this._nameUpdate;
+    }
+    set nameUpdate(value) {
+        this._nameUpdate = value;
     }
 
-    addressUpdate = (event) => {
+    _addressUpdate = (event) => {
         this.setState({
             address: event.target.value
-        })
+        });
+    };
+    get addressUpdate() {
+        return this._addressUpdate;
+    }
+    set addressUpdate(value) {
+        this._addressUpdate = value;
     }
 
-    latitudeUpdate = (event) => {
+    _latitudeUpdate = (event) => {
         this.setState({
             latitude: event.target.value
-        })
+        });
+    };
+    get latitudeUpdate() {
+        return this._latitudeUpdate;
+    }
+    set latitudeUpdate(value) {
+        this._latitudeUpdate = value;
     }
     
-    longitudeUpdate = (event) => {
+    _longitudeUpdate = (event) => {
         this.setState({
             longitude: event.target.value
-        })
+        });
+    };
+    get longitudeUpdate() {
+        return this._longitudeUpdate;
+    }
+    set longitudeUpdate(value) {
+        this._longitudeUpdate = value;
     }
 
-    addRow = (event) => {
-        event.preventDefault()
-        alert("You have just submited a building")
-
+    _addRow = (event) => {
+        event.preventDefault();
+        alert("You have just submited a building");
         this.state.newData.push({
             "id": this.props.newestId,
             "code": this.state.code,
@@ -59,66 +81,56 @@ class AddBuilding extends React.Component {
                 "longitude": this.state.longitude
             },
             "address": this.state.address
-        })
-        this.props.updateData(this.state.newData)
-        this.props.incrementNewestId(this.props.newestId)
+        });
+        this.props.updateData(this.state.newData);
+        this.props.incrementNewestId(this.props.newestId);
+    };
+    get addRow() {
+        return this._addRow;
+    }
+    set addRow(value) {
+        this._addRow = value;
+    }
+
+    setState() {
+        this.state = {
+            code: '',
+            name: '',
+            address: '',
+            latitude: '',
+            longitude: '',
+            newData: this.props.data
+        };
     }
 
 	render() {
+        const newLocal = <input class="form-control" type='text' value={this.state.code} onChange={this.codeUpdate} placeholder="Enter Building Code" />;
+        const newLocal_1 = <input class="form-control" type='text' value={this.state.name} onChange={this.nameUpdate} placeholder="Enter Building Name" />;
+        const newLocal_2 = <input class="form-control" type='text' value={this.state.address} onChange={this.addressUpdate} placeholder="Enter Building Address" />;
 		return (
             <form>
                 <div class="form-group">
                     <label >Code</label>
-                    <input
-                        class="form-control"
-                        type='text'
-                        value={this.state.code}
-                        onChange={this.codeUpdate}
-                        placeholder="Enter Building Code"
-                    />
+                    newLocal
                 </div>
                 <div class="form-group">
                     <label>Name</label>
-                    <input
-                        class="form-control"
-                        type='text'
-                        value={this.state.name}
-                        onChange={this.nameUpdate}
-                        placeholder="Enter Building Name"
-                    />
+                    newLocal_1
                 </div>
                 <div class="form-group">
                     <label>Address</label>
-                    <input
-                        class="form-control"
-                        type='text'
-                        value={this.state.address}
-                        onChange={this.addressUpdate}
-                        placeholder="Enter Building Address"
-                    />
+                    newLocal_2
                 </div>
                 <label class="col-sm-2 col-form-label col-form-label-lg">Coordinates     
                 </label>
                 <div class="form-row">
                     <div class="form-group col">
                         Latitude
-                        <input
-                            class="form-control"
-                            type='text'
-                            value={this.state.latitude}
-                            onChange={this.latitudeUpdate}
-                            placeholder="Enter a number"
-                        />
+                        this.newMethod()
                     </div>
                     <div class="form-group col">
                         Longitude
-                        <input
-                            class="form-control"
-                            type='text'
-                            value={this.state.ongitude}
-                            onChange={this.longitudeUpdate}
-                            placeholder="Enter a number"
-                        />
+                        this.newMethod_1()
                     </div>
                 </div>
                 <div class="form-group">
@@ -129,5 +141,13 @@ class AddBuilding extends React.Component {
             </form>
 		);
 	}
+
+    newMethod_1() {
+        return <input class="form-control" type='text' value={this.state.ongitude} onChange={this.longitudeUpdate} placeholder="Enter a number" />;
+    }
+
+    newMethod() {
+        return <input class="form-control" type='text' value={this.state.latitude} onChange={this.latitudeUpdate} placeholder="Enter a number" />;
+    }
 }
 export default AddBuilding;
